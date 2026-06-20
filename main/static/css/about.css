@@ -1,0 +1,18 @@
+.about_container{
+    display: flex;
+    justify-content: space-around;
+            align-items: center;
+            margin: 80px 0;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            height: 100vh;
+            
+}
+.about_container .about_sections{
+    width: 40%;
+}
+
+.about_right{
+    display: flex;
+    justify-content: center;
+}

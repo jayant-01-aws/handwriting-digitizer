@@ -1,0 +1,314 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digitize Text - Handwritten Text Recognition</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #0f172a;
+            color: #ffffff;
+        }
+
+        .digitize-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .digitize-header {
+            text-align: center;
+            margin-bottom: 50px;
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .digitize-header h1 {
+            font-size: 2.5em;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .digitize-header p {
+            color: #e0e0e0;
+            font-size: 1.1em;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content-wrapper {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .text-section {
+            flex: 1.5;
+            min-width: 500px;
+            max-width: 600px;
+        }
+
+        .image-section {
+            flex: 1;
+            min-width: 400px;
+            max-width: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #1e293b;
+            border-radius: 10px;
+            padding: 20px;
+            height: 400px;
+        }
+
+        .input-text {
+            width: 100%;
+            height: 400px;
+            background-color: #1e293b;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 20px;
+            font-size: 1.2em;
+            resize: none;
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+        }
+
+        .input-text:focus {
+            outline: none;
+        }
+
+        .wrapper1 {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            padding: 0;
+        }
+
+        .container1 {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .cont2 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        #upload-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .inptfile {
+            display: none;
+        }
+
+        .inptlabel {
+            background-color: #0ea5e9;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .inptlabel:hover {
+            background-color: #0284c7;
+        }
+
+        .start_btn {
+            background-color: #0ea5e9;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+            width: 100%;
+            max-width: 200px;
+        }
+
+        .start_btn:hover {
+            background-color: #0284c7;
+        }
+
+        .start_btn:disabled {
+            background-color: #94a3b8;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 1200px) {
+            .content-wrapper {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .text-section, .image-section {
+                max-width: 100%;
+                min-width: 100%;
+            }
+        }
+
+        .left {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8em;
+            font-weight: 600;
+            color: #3498db;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            transition: color 0.3s ease;
+        }
+
+        .left:hover {
+            color: #2980b9;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="left">Smart Text</div>
+            <div class="right">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/digitize/">Digitize Text</a></li>
+                    <li><a href="/about/">About</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="digitize-container">
+        <div class="digitize-header">
+            <h1>Digitize Your Handwritten Text</h1>
+            <p>Upload your handwritten text image and let our AI convert it into digital format.</p>
+        </div>
+
+        <div class="container1">
+            <div class="wrapper1">
+                <div class="content-wrapper">
+                    <div class="text-section">
+                        <textarea class="input-text" placeholder="Your digitized text will appear here..." readonly></textarea>
+                    </div>
+                    <div class="image-section">
+                        <img id="preview-image" src="" alt="Preview" style="display: none; max-width: 100%; max-height: 400px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cont2">
+            <form id="upload-form" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" id="inputbtn" name="image" class="inptfile" accept="image/*">
+                <label for="inputbtn" class="inptlabel"><i class="fa-solid fa-upload"></i> Upload File</label>
+                <button type="submit" class="start_btn" id="process-btn">Start Processing</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script>
+        document.getElementById('inputbtn').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const previewImage = document.getElementById('preview-image');
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.getElementById('upload-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const startBtn = document.getElementById('process-btn');
+            const inputText = document.querySelector('.input-text');
+            
+            // Show loading state
+            startBtn.disabled = true;
+            startBtn.textContent = 'Processing...';
+            inputText.value = 'Processing image...';
+            
+            fetch('/digitize/', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const contentType = response.headers.get('content-type');
+                if (!contentType || !contentType.includes('application/json')) {
+                    throw new TypeError("Oops, we haven't got JSON!");
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    // Display the extracted text
+                    inputText.value = data.extracted_text;
+                    console.log('Text extracted successfully');
+                } else {
+                    inputText.value = 'Error: ' + data.error;
+                    console.error('Error:', data.error);
+                }
+            })
+            .catch(error => {
+                inputText.value = 'Error: ' + error.message;
+                console.error('Error:', error);
+            })
+            .finally(() => {
+                // Reset button state
+                startBtn.disabled = false;
+                startBtn.textContent = 'Start Processing';
+            });
+        });
+    </script>
+</body>
+
+</html> 

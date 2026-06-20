@@ -1,0 +1,268 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Handwritten Text Recognition</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #0f172a;
+            color: #ffffff;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 50px;
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .about-header h1 {
+            font-size: 2.5em;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .about-header p {
+            color: #e0e0e0;
+            font-size: 1.1em;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .feature-card {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-card i {
+            font-size: 2.5em;
+            color: #3498db;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5em;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .contact-section {
+            background: #1e293b;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-container {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .contact-left {
+            flex: 1;
+        }
+
+        .contact-left-title h2 {
+            font-size: 2em;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .contact-left-title hr {
+            width: 50px;
+            height: 4px;
+            background-color: #0ea5e9;
+            border: none;
+            margin-bottom: 30px;
+        }
+
+        .contact-input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: rgba(15, 23, 42, 0.8);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            font-size: 1em;
+        }
+
+        .contact-input::placeholder {
+            color: #94a3b8;
+        }
+
+        .contact-input:focus {
+            outline: none;
+            border-color: #0ea5e9;
+            box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.2);
+        }
+
+        .contact_btn {
+            background-color: #0ea5e9;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact_btn:hover {
+            background-color: #0284c7;
+        }
+
+        .contact-right {
+            flex: 1;
+        }
+
+        .contact-right img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .contact-left, .contact-right {
+                width: 100%;
+            }
+        }
+
+        .left {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8em;
+            font-weight: 600;
+            color: #3498db;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            transition: color 0.3s ease;
+        }
+
+        .left:hover {
+            color: #2980b9;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="left">Smart Text</div>
+            <div class="right">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/#digitize">Digitize Text</a></li>
+                    <li><a href="/about/">About</a></li>
+                    <li><a href="/#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="about-container">
+        <div class="about-header">
+            <h1>About Our Handwritten Text Recognition System</h1>
+            <p>We're revolutionizing the way handwritten text is converted into digital format using advanced AI technology.</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-brain"></i>
+                <h3>Advanced AI Technology</h3>
+                <p>Our system uses state-of-the-art Convolutional Neural Networks (CNN) to achieve high accuracy in text recognition.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-language"></i>
+                <h3>Multi-language Support</h3>
+                <p>Support for multiple languages and writing styles, making it versatile for various applications.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-bolt"></i>
+                <h3>Real-time Processing</h3>
+                <p>Fast and efficient processing of handwritten text with minimal delay.</p>
+            </div>
+        </div>
+
+        <div class="contact-section">
+            <div class="contact-container">
+                <div class="contact-left">
+                    <div class="contact-left-title">
+                        <h2>Get in Touch</h2>
+                        <hr />
+                    </div>
+                    <form action="https://api.web3forms.com/submit" method="POST">
+                        <input type="hidden" name="access_key" value="9aba8581-c6db-4da4-9980-4f23f5c8ac85" />
+                        <input type="text" name="name" placeholder="Your Name" class="contact-input" required />
+                        <input type="email" name="email" placeholder="Your Email" class="contact-input" required />
+                        <textarea name="message" placeholder="Your Message" class="contact-input" rows="5" required></textarea>
+                        <button type="submit" class="contact_btn">
+                            Send Message <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>

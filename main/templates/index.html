@@ -1,0 +1,703 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Handwritten Text Recognition</title>
+  <!-- Font awsome cdn link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- navbar css link -->
+  <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+  <!-- firstsection css link -->
+  <link rel="stylesheet" href="{% static 'css/firstsection.css' %}">
+  <!-- language traslation (secondsection) css link -->
+  <link rel="stylesheet" href="{% static 'css/secondsection.css' %}">
+  <!-- About section css -->
+  <link rel="stylesheet" href="{% static 'css/about.css' %}">
+  <!-- Contact css link -->
+   <link rel="stylesheet" href="{% static 'css/contact.css' %}">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      color: #ffffff;
+    }
+
+    .hero-section {
+      background: linear-gradient(135deg, #1e293b, #0ea5e9);
+      color: white;
+      padding: 100px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .hero-content h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+
+    .hero-content p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .cta-button {
+      padding: 15px 30px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: transform 0.3s ease;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+    }
+
+    .primary-button {
+      background-color: white;
+      color: #2c3e50;
+    }
+
+    .secondary-button {
+      background-color: transparent;
+      border: 2px solid white;
+      color: white;
+    }
+
+    .features-section {
+      padding: 80px 0;
+      background-color: #1e293b;
+      position: relative;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .feature-card {
+      background: rgba(30, 41, 59, 0.8);
+      backdrop-filter: blur(10px);
+      color: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .feature-card i {
+      font-size: 2.5em;
+      color: #3498db;
+      margin-bottom: 20px;
+    }
+
+    .feature-card h3 {
+      color: #ffffff;
+      font-size: 1.5em;
+      margin-bottom: 15px;
+    }
+
+    .feature-card p {
+      color: #e0e0e0;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2em;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .about-section {
+      background-color: #1e293b;
+      color: white;
+      padding: 80px 0;
+      position: relative;
+    }
+
+    .about_container {
+      background: rgba(30, 41, 59, 0.8);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 40px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .about_left h1 {
+      color: #ffffff;
+    }
+
+    .about_left p {
+      color: #e0e0e0;
+    }
+
+    .contact-section {
+      background: #1e293b;
+      padding: 80px 0;
+      position: relative;
+    }
+
+    .contact-container {
+      background: rgba(30, 41, 59, 0.8);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 40px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .contact-left-title h2 {
+      color: #ffffff;
+    }
+
+    .contact-input {
+      background-color: rgba(15, 23, 42, 0.8);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .contact-input::placeholder {
+      color: #bdc3c7;
+    }
+
+    .contact-input:focus {
+      border-color: #0ea5e9;
+      box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.2);
+    }
+
+    .contact_btn {
+      background-color: #0ea5e9;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .contact_btn:hover {
+      background-color: #0284c7;
+    }
+
+    .firstsection {
+      background-color: #1e293b;
+      color: white;
+      padding: 40px 0;
+      position: relative;
+    }
+
+    .input-text {
+      width: 100%;
+      min-height: 200px;
+      background-color: rgba(15, 23, 42, 0.8);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 15px;
+      font-size: 1.1em;
+      resize: vertical;
+      margin-top: 20px;
+    }
+
+    .input-text:focus {
+      outline: none;
+      border-color: #0ea5e9;
+      box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.2);
+    }
+
+    .wrapper1 {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .secondSection {
+      background-color: #34495e;
+      color: white;
+      padding: 40px 0;
+    }
+
+    .from-text, .to-text {
+      background-color: #2c3e50;
+      color: white;
+      border: 1px solid #3498db;
+    }
+
+    .from-text::placeholder, .to-text::placeholder {
+      color: #bdc3c7;
+    }
+
+    .btn2 {
+      background-color: #3498db;
+      color: white;
+    }
+
+    .btn2:hover {
+      background-color: #2980b9;
+    }
+
+    .left {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.8em;
+      font-weight: 600;
+      color: #3498db;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      transition: color 0.3s ease;
+    }
+
+    .left:hover {
+      color: #2980b9;
+    }
+
+    .start_btn {
+      background-color: #0ea5e9;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background-color 0.3s ease;
+      margin-top: 10px;
+      width: 100%;
+      max-width: 200px;
+    }
+
+    .start_btn:hover {
+      background-color: #0284c7;
+    }
+
+    .start_btn:disabled {
+      background-color: #94a3b8;
+      cursor: not-allowed;
+    }
+
+    .inptfile {
+      display: none;
+    }
+
+    .inptlabel {
+      background-color: #0ea5e9;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    .inptlabel:hover {
+      background-color: #0284c7;
+    }
+
+    .cont2 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #upload-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .image-container {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .image-box {
+      flex: 1;
+      min-width: 300px;
+      background: rgba(30, 41, 59, 0.8);
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .image-box h3 {
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    .text-container {
+      background: rgba(30, 41, 59, 0.8);
+      padding: 15px;
+      border-radius: 10px;
+    }
+
+    .text-container h3 {
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    .input-text {
+      width: 100%;
+      min-height: 150px;
+      background-color: rgba(15, 23, 42, 0.8);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 15px;
+      font-size: 1em;
+      resize: vertical;
+    }
+
+    .input-text:focus {
+      outline: none;
+      border-color: #0ea5e9;
+      box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.2);
+    }
+
+    .wrapper1 {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .content-wrapper {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    .text-section {
+      flex: 1.5;
+      min-width: 500px;
+      max-width: 600px;
+    }
+
+    .image-section {
+      flex: 1;
+      min-width: 400px;
+      max-width: 500px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #1e293b;
+      border-radius: 10px;
+      padding: 20px;
+      height: 400px;
+    }
+
+    .input-text {
+      width: 100%;
+      height: 400px;
+      background-color: #1e293b;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 20px;
+      font-size: 1.2em;
+      resize: none;
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+    }
+
+    .input-text:focus {
+      outline: none;
+    }
+
+    .wrapper1 {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+      padding: 0;
+    }
+
+    .container1 {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    @media (max-width: 1200px) {
+      .content-wrapper {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .text-section, .image-section {
+        max-width: 100%;
+        min-width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="left">Smart Text</div>
+      <div class="right">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/digitize/">Digitize Text</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1>Transform Handwritten Text to Digital</h1>
+      <p>Our advanced AI technology converts your handwritten notes into digital text with high accuracy.</p>
+      <div class="cta-buttons">
+        <a href="/digitize/" class="cta-button primary-button">Start Digitizing</a>
+        <a href="/about/" class="cta-button secondary-button">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="features-section">
+    <div class="features-grid">
+      <div class="feature-card">
+        <i class="fas fa-magic"></i>
+        <h3>Smart Recognition</h3>
+        <p>Advanced AI algorithms that understand various handwriting styles and convert them accurately.</p>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-language"></i>
+        <h3>Multi-language Support</h3>
+        <p>Support for multiple languages and writing styles, making it versatile for various applications.</p>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-bolt"></i>
+        <h3>Real-time Processing</h3>
+        <p>Fast and efficient processing of handwritten text with minimal delay.</p>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section id="digitize" class="firstsection">
+      <div class="container1">
+        <div class="wrapper1">
+          <div class="content-wrapper">
+            <div class="text-section">
+              <textarea class="input-text" placeholder="Your digitized text will appear here..." readonly></textarea>
+            </div>
+            <div class="image-section">
+              <img id="preview-image" src="" alt="Preview" style="display: none; max-width: 100%; max-height: 400px;">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cont2">
+        <form id="upload-form" enctype="multipart/form-data">
+          {% csrf_token %}
+          <input type="file" id="inputbtn" name="image" class="inptfile" accept="image/*">
+          <label for="inputbtn" class="inptlabel"><i class="fa-solid fa-upload"></i> Upload File</label>
+          <button type="submit" class="start_btn" id="process-btn">Start Processing</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="secondSection">
+      <div class="container">
+        <div class="wrapper">
+          <div class="text-input">
+            <textarea spellcheck="false" class="from-text" placeholder="Enter text to translate"></textarea>
+            <textarea spellcheck="false" readonly disabled class="to-text" placeholder="Translation will appear here"></textarea>
+          </div>
+          <ul class="controls">
+            <li class="row from">
+              <div class="icons">
+                <i id="from" class="fas fa-volume-up"></i>
+                <i id="from" class="fas fa-copy"></i>
+              </div>
+              <select></select>
+            </li>
+            <li class="exchange"><i class="fas fa-exchange-alt"></i></li>
+            <li class="row to">
+              <select></select>
+              <div class="icons">
+                <i id="to" class="fas fa-volume-up"></i>
+                <i id="to" class="fas fa-copy"></i>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <button class="btn2">Translate Text</button>
+      </div>
+    </section>
+
+    <section class="about-section">
+      <div class="about_container">
+        <div class="about_left about_sections">
+          <h1>Handwriting To Text Converter Using CNN</h1>
+          <p>A handwriting-to-text converter using Convolutional Neural Networks (CNN) leverages deep learning to automatically recognize handwritten characters and convert them into machine-readable text. CNNs excel at identifying spatial hierarchies and patterns within images, making them ideal for handwritten text recognition.</p>
+          <p>By training on large datasets of handwritten samples, the model learns to distinguish various writing styles and nuances, achieving high accuracy in converting diverse handwriting into digital text.</p>
+          <p>Applications include digitizing historical documents, automating data entry, educational tools, and note-taking apps. CNN-based handwriting recognition is robust, scalable, and continues to improve with more data and advanced training techniques.</p>
+        </div>
+        <div class="about_right about_sections">
+          <img src="{% static 'images/Writing.jpg' %}" alt="Handwriting Recognition">
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+      <div class="contact-container">
+        <div class="contact_left contact_section">
+          <form action="https://api.web3forms.com/submit" method="POST" class="contact-left">
+            <div class="contact-left-title">
+              <h2>Contact Us</h2>
+              <hr />
+            </div>
+            <input type="hidden" name="access_key" value="9aba8581-c6db-4da4-9980-4f23f5c8ac85" />
+            <input type="text" name="name" placeholder="Your Name" class="contact-input" required />
+            <input type="email" name="email" placeholder="Your Email" class="contact-input" required />
+            <textarea name="message" placeholder="Your Message" class="contact-input" required></textarea>
+            <button type="submit" class="contact_btn">
+              Send Message <i class="fas fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+        <div class="contact-right contact_section">
+          <img src="{% static 'images/right_img.png' %}" alt="contact" />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="{% static 'js/countries.js' %}"></script>
+  <script src="{% static 'js/translation.js' %}"></script>
+  <script src="{% static 'js/script.js' %}"></script>
+  <script>
+    document.getElementById('inputbtn').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const previewImage = document.getElementById('preview-image');
+          previewImage.src = e.target.result;
+          previewImage.style.display = 'block';
+        }
+        reader.readAsDataURL(file);
+      }
+    });
+
+    document.getElementById('upload-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const startBtn = document.getElementById('process-btn');
+      const inputText = document.querySelector('.input-text');
+      
+      // Show loading state
+      startBtn.disabled = true;
+      startBtn.textContent = 'Processing...';
+      inputText.value = 'Processing image...';
+      
+      fetch('/digitize/', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+        }
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const contentType = response.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+          throw new TypeError("Oops, we haven't got JSON!");
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (data.success) {
+          // Display the extracted text
+          inputText.value = data.extracted_text;
+          console.log('Text extracted successfully');
+        } else {
+          inputText.value = 'Error: ' + data.error;
+          console.error('Error:', data.error);
+        }
+      })
+      .catch(error => {
+        inputText.value = 'Error: ' + error.message;
+        console.error('Error:', error);
+      })
+      .finally(() => {
+        // Reset button state
+        startBtn.disabled = false;
+        startBtn.textContent = 'Start Processing';
+      });
+    });
+  </script>
+</body>
+
+</html>

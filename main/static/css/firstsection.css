@@ -1,0 +1,58 @@
+.container1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper1 {
+    display: flex;
+    height: 360px;
+    width: 800px;
+    background-color: white;
+    margin: 35px 0;
+
+}
+
+.input-text {
+    width: 100%;
+    font-size: 25px;
+    background: none;
+}
+
+.cont2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+/* Input file */
+.inptfile{
+    display: none;
+}
+
+.inptlabel{
+    display: inline-block;
+    text-transform: uppercase;
+    color: #fff;
+    background: red;
+    text-align: center;
+    width: 505px;
+    height: 60px;
+    align-content: center;
+    user-select: none;
+    cursor: pointer;
+}
+
+.inptlabel i{
+    background: red;
+}
+/* Start button */
+.cont2 .start_btn {
+    margin-top: 15px;
+    cursor: pointer; 
+    width: 505px;
+    height: 60px;
+    border: none;
+    background-color: #3ddb3d;
+}
+
