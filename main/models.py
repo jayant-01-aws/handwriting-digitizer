@@ -10,7 +10,11 @@ import os
 from PIL import Image
 import io
 import base64
+# Line 13 ke baad seedhe ye rakhein:
+from google import genai
+from google.genai import types
 
+logger = logging.getLogger(__name__)
 from google import genai
 from google.genai import types
 import os
