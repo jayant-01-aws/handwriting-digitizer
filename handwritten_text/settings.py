@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-ajsrnc))^f0l$6s&h1sw+lk^z4_0n!fh+&k)e4*ief!wzmsa7t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['handwriting-digitizer.onrender.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
